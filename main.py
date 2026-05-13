@@ -3,12 +3,12 @@ import json
 import requests
 import websockets
 
-TOKEN = "Add your token here"
-GUILD_ID = "ADD_YOUR_SERVER_ID_HERE"
-CHANNEL_ID = "ADD_YOUR_CHANNEL_ID_HERE"
+TOKEN = "MTQ5NzMxNTAxOTcxMTQ0NzE5Mg.GzBPD1.QFNRZMHw4e_MefXsjEMSp-ZfeLY6dXm40mj1fQ"
+GUILD_ID = "1406578842499551322"
+CHANNEL_ID = "1480834475972759563"
 
 STATUS = "online" # online / dnd / idle
-SELF_MUTE = True
+SELF_MUTE = False
 SELF_DEAF = False
 
 API = "https://discord.com/api/v10"
