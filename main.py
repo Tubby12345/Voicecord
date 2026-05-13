@@ -2,8 +2,10 @@ import asyncio
 import json
 import requests
 import websockets
+import os
+# ลบ Token เก่าออกแล้วใส่บรรทัดนี้แทน
+TOKEN = os.getenv("TOKEN")
 
-TOKEN = "MTQ5NzMxNTAxOTcxMTQ0NzE5Mg.GG7Q_Q.kC1-C77TAjX-nG78IQMiOr78oT0Vw03JdNEF9w"
 GUILD_ID = "1406578842499551322"
 CHANNEL_ID = "1480834475972759563"
 
