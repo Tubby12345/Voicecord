@@ -3,15 +3,15 @@ import json
 import requests
 import websockets
 import os
-# ลบ Token เก่าออกแล้วใส่บรรทัดนี้แทน
+
 TOKEN = os.getenv("TOKEN")
+GUILD_ID = os.getenv("SERVER_ID")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
-GUILD_ID = "1406578842499551322"
-CHANNEL_ID = "1480834475972759563"
+STATUS = os.getenv("STATUS", "online")
 
-STATUS = "online" # online / dnd / idle
-SELF_MUTE = False
-SELF_DEAF = False
+SELF_MUTE = os.getenv("SELF_MUTE", "False").lower() in ("true", "1", "yes")
+SELF_DEAF = os.getenv("SELF_DEAF", "False").lower() in ("true", "1", "yes")
 
 API = "https://discord.com/api/v10"
 
