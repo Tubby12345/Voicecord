@@ -4,16 +4,20 @@ import requests
 import websockets
 import os
 
+# ดึงค่าจาก Environment Variables
 TOKEN = os.getenv("TOKEN")
 GUILD_ID = os.getenv("SERVER_ID")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 STATUS = os.getenv("STATUS", "online")
-
 SELF_MUTE = os.getenv("SELF_MUTE", "False").lower() in ("true", "1", "yes")
 SELF_DEAF = os.getenv("SELF_DEAF", "False").lower() in ("true", "1", "yes")
 
 API = "https://discord.com/api/v10"
+
+if not TOKEN or not GUILD_ID or not CHANNEL_ID:
+    print("Error: Missing required environment variables! (TOKEN, SERVER_ID, or CHANNEL_ID)")
+    exit()
 
 res = requests.get(f"{API}/users/@me", headers={"Authorization": TOKEN})
 if res.status_code != 200:
@@ -31,6 +35,7 @@ async def heartbeat(ws, interval):
 async def main():
     uri = "wss://gateway.discord.gg/?v=10&encoding=json"
 
+    # [FIXED] ตั้งค่า max_size=None เพื่อไม่จำกัดขนาดข้อความ ป้องกัน Error 1009 (message too big)
     async with websockets.connect(uri, max_size=None) as ws:
         hello = json.loads(await ws.recv())
         heartbeat_interval = hello["d"]["heartbeat_interval"]
@@ -68,7 +73,7 @@ async def main():
             }
         }))
 
-        print("Joined the voice channel!")
+        print(f"Joined the voice channel! (Mute: {SELF_MUTE}, Deaf: {SELF_DEAF})")
 
         while True:
             try:
